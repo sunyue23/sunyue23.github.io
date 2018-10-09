@@ -427,17 +427,11 @@
       
         
           
-          linux中date类型比较#!/bin/bash
-function get_interest_info(){ echo -e “$1”}
-startTime=”$1”endTime=”$2”echo “startTime: $startTime”echo “endTime: $endTime”while [[ “$startTime” -ge “$endTime” ]]do    get_int
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/27/未解之谜-1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h4 id="linux中date类型比较"><a href="#linux中date类型比较" class="headerlink" title="linux中date类型比较"></a>linux中date类型比较</h4><p>#!/bin/bash</p>
+<p>function get_interest_info()<br>{<br> echo -e “$1”<br>}</p>
+<p>startTime=”$1”<br>endTime=”$2”<br>echo “startTime: $startTime”<br>echo “endTime: $endTime”<br>while [[ “$startTime” -ge “$endTime” ]]<br>do<br>    get_interest_info $startTime<br>    startTime=<code>date -d &quot;+1 day $startTime&quot; +%Y-%m-%d</code><br>done</p>
+
+          
         
       
     </div>
