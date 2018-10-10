@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="Vue.config.devtools=false; Vue.config.productionTip=false;没效果  v-for key 作用  06练习">
-<meta name="keywords" content="vue">
+  <meta name="description" content="@ConfigurationProperties注解的作用是可以根据一个前缀将配置文件的属性映射成一个POJO实体类，只要属性名一致就能自动注入进去，使用起来非常方便，这一点容易与@Configuration注解混淆，@Configuration也可以注解一个配置类，不一样的是它需要为每个属性再次声明绑定的字段，稍微复杂，所以推荐使用@ConfigurationProperties注解。  下面看">
+<meta name="keywords" content="spring-boot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue">
-<meta property="og:url" content="http://yoursite.com/2018/08/24/vue/vue/index.html">
+<meta property="og:title" content="在spring-boot中使用@ConfigurationProperties">
+<meta property="og:url" content="http://yoursite.com/2018/10/10/spring/在spring-boot中使用@ConfigurationProperties/index.html">
 <meta property="og:site_name" content="sunyue&#39;s Personal website">
-<meta property="og:description" content="Vue.config.devtools=false; Vue.config.productionTip=false;没效果  v-for key 作用  06练习">
+<meta property="og:description" content="@ConfigurationProperties注解的作用是可以根据一个前缀将配置文件的属性映射成一个POJO实体类，只要属性名一致就能自动注入进去，使用起来非常方便，这一点容易与@Configuration注解混淆，@Configuration也可以注解一个配置类，不一样的是它需要为每个属性再次声明绑定的字段，稍微复杂，所以推荐使用@ConfigurationProperties注解。  下面看">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-25T03:57:23.430Z">
+<meta property="og:updated_time" content="2018-10-10T11:00:29.103Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vue">
-<meta name="twitter:description" content="Vue.config.devtools=false; Vue.config.productionTip=false;没效果  v-for key 作用  06练习">
+<meta name="twitter:title" content="在spring-boot中使用@ConfigurationProperties">
+<meta name="twitter:description" content="@ConfigurationProperties注解的作用是可以根据一个前缀将配置文件的属性映射成一个POJO实体类，只要属性名一致就能自动注入进去，使用起来非常方便，这一点容易与@Configuration注解混淆，@Configuration也可以注解一个配置类，不一样的是它需要为每个属性再次声明绑定的字段，稍微复杂，所以推荐使用@ConfigurationProperties注解。  下面看">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/24/vue/vue/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/10/10/spring/在spring-boot中使用@ConfigurationProperties/"/>
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>vue | sunyue's Personal website</title>
+  <title>在spring-boot中使用@ConfigurationProperties | sunyue's Personal website</title>
   
 
 
@@ -301,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/24/vue/vue/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/10/spring/在spring-boot中使用@ConfigurationProperties/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sunyue">
@@ -318,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">vue
+          <h1 class="post-title" itemprop="name headline">在spring-boot中使用@ConfigurationProperties
               
             
           </h1>
@@ -343,24 +343,12 @@
                 
               
 
-              <time title="创建时间：2018-08-24 10:52:00" itemprop="dateCreated datePublished" datetime="2018-08-24T10:52:00+08:00">2018-08-24</time>
+              <time title="创建时间：2018-10-10 17:55:23 / 修改时间：19:00:29" itemprop="dateCreated datePublished" datetime="2018-10-10T17:55:23+08:00">2018-10-10</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-25 11:57:23" itemprop="dateModified" datetime="2018-08-25T11:57:23+08:00">2018-08-25</time>
               
             
           </span>
@@ -377,7 +365,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vue/" itemprop="url" rel="index"><span itemprop="name">vue</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a></span>
 
                 
                 
@@ -391,7 +379,7 @@
 
           
           
-             <span id="/2018/08/24/vue/vue/" class="leancloud_visitors" data-flag-title="vue">
+             <span id="/2018/10/10/spring/在spring-boot中使用@ConfigurationProperties/" class="leancloud_visitors" data-flag-title="在spring-boot中使用@ConfigurationProperties">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -422,15 +410,16 @@
       
 
       
-        <ol>
-<li><p>Vue.config.devtools=false;</p>
-<p>Vue.config.productionTip=false;没效果</p>
-</li>
-<li><p>v-for key 作用</p>
-</li>
-<li><p>06练习</p>
-</li>
-</ol>
+        <p>@ConfigurationProperties注解的作用是可以根据一个前缀将配置文件的属性映射成一个POJO实体类，只要属性名一致就能自动注入进去，使用起来非常方便，这一点容易与@Configuration注解混淆，@Configuration也可以注解一个配置类，不一样的是它需要为每个属性再次声明绑定的字段，稍微复杂，所以推荐使用@ConfigurationProperties注解。</p>
+<p> 下面看一个简单的例子，我有一个配置文件,下面包含了多种数据结构的属性，如下：</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#Simple properties</span><br><span class="line">mail.host=mailer@mail.com</span><br><span class="line">mail.port=9000</span><br><span class="line">mail.from=mailer@mail.com</span><br><span class="line"></span><br><span class="line">#List properties</span><br><span class="line">mail.recipients[0]=admin@mail.com</span><br><span class="line">mail.recipients[1]=owner@mail.com</span><br><span class="line"></span><br><span class="line">#Map Properties</span><br><span class="line">mail.additionalHeaders.redelivery=true</span><br><span class="line">mail.additionalHeaders.secure=true</span><br><span class="line"></span><br><span class="line">#Object properties</span><br><span class="line">mail.credentials.username=john</span><br><span class="line">mail.credentials.password=password</span><br><span class="line">mail.credentials.authMethod=SHA1</span><br><span class="line"></span><br><span class="line">#List&lt;Object&gt;</span><br><span class="line">mail.cs[0].username=cs1</span><br><span class="line">mail.cs[0].password=cs1pwd</span><br><span class="line">mail.cs[0].authMethod=SHA1</span><br><span class="line"></span><br><span class="line">mail.cs[1].username=cs2</span><br><span class="line">mail.cs[1].password=cs2pwd</span><br><span class="line">mail.cs[1].authMethod=SHA2</span><br><span class="line"></span><br><span class="line">#Map&lt;String,Object&gt;</span><br><span class="line">mail.mp.k1.username=k1</span><br><span class="line">mail.mp.k1.password=pwdk1</span><br><span class="line">mail.mp.k1.authMethod=SHA3</span><br><span class="line"></span><br><span class="line">mail.mp.k2.username=k2</span><br><span class="line">mail.mp.k2.password=pwdk2</span><br><span class="line">mail.mp.k2.authMethod=SHA3</span><br></pre></td></tr></table></figure>
+<p> 现在我们就可以通过@ConfigurationProperties注解将其映射成一个配置类，这样使用起来就非常方便了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@PropertySource(&quot;classpath:mail.properties&quot;)</span><br><span class="line">@ConfigurationProperties(prefix = &quot;mail&quot;)</span><br><span class="line">public class ConfigProperties &#123;</span><br><span class="line"></span><br><span class="line">    public static class Credentials&#123;</span><br><span class="line"></span><br><span class="line">        private String authMethod;</span><br><span class="line">        private String username;</span><br><span class="line">        private String password;</span><br><span class="line"></span><br><span class="line">        public String getAuthMethod() &#123;</span><br><span class="line">            return authMethod;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setAuthMethod(String authMethod) &#123;</span><br><span class="line">            this.authMethod = authMethod;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public String getUsername() &#123;</span><br><span class="line">            return username;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setUsername(String username) &#123;</span><br><span class="line">            this.username = username;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public String getPassword() &#123;</span><br><span class="line">            return password;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setPassword(String password) &#123;</span><br><span class="line">            this.password = password;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public String toString() &#123;</span><br><span class="line">            return &quot;Credentials&#123;&quot; +</span><br><span class="line">                    &quot;authMethod=&apos;&quot; + authMethod + &apos;\&apos;&apos; +</span><br><span class="line">                    &quot;, username=&apos;&quot; + username + &apos;\&apos;&apos; +</span><br><span class="line">                    &quot;, password=&apos;&quot; + password + &apos;\&apos;&apos; +</span><br><span class="line">                    &apos;&#125;&apos;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private String host;</span><br><span class="line">    private int port;</span><br><span class="line">    private String from;</span><br><span class="line">    private Credentials credentials;</span><br><span class="line">    private List&lt;String&gt; recipients;//接受者</span><br><span class="line">    private Map&lt;String,String&gt; additionalHeaders;</span><br><span class="line">    private Map&lt;String,Credentials&gt; mp;</span><br><span class="line">    private List&lt;Credentials&gt;  cs;</span><br><span class="line"></span><br><span class="line">	//getter setter 省略</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p> 这个类里面的每个属性和配置里面的属性对应，注意字段名必须是一样的才能赋值： 为了验证是否成功，我们建一个controller类,通过http：//localhost:8777/test 来验证一下，看是否成功：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">==============简单属性访问================</span><br><span class="line">mailer@mail.com</span><br><span class="line">mailer@mail.com</span><br><span class="line">9000</span><br><span class="line"></span><br><span class="line">==============List[String]访问================</span><br><span class="line">[admin@mail.com, owner@mail.com]</span><br><span class="line"></span><br><span class="line">==============Map[String,String]访问================</span><br><span class="line">&#123;secure=true, redelivery=true&#125;</span><br><span class="line"></span><br><span class="line">==============Object访问================</span><br><span class="line">Credentials&#123;authMethod=&apos;SHA1&apos;, username=&apos;john&apos;, password=&apos;password&apos;&#125;</span><br><span class="line"></span><br><span class="line">==============List[Object]访问================</span><br><span class="line">Credentials&#123;authMethod=&apos;SHA1&apos;, username=&apos;cs1&apos;, password=&apos;cs1pwd&apos;&#125;</span><br><span class="line">Credentials&#123;authMethod=&apos;SHA2&apos;, username=&apos;cs2&apos;, password=&apos;cs2pwd&apos;&#125;</span><br><span class="line"></span><br><span class="line">==============Map[String,Object]访问================</span><br><span class="line">k2 Credentials&#123;authMethod=&apos;SHA3&apos;, username=&apos;k2&apos;, password=&apos;pwdk2&apos;&#125;</span><br><span class="line">k1 Credentials&#123;authMethod=&apos;SHA3&apos;, username=&apos;k1&apos;, password=&apos;pwdk1&apos;&#125;</span><br><span class="line">（注意不支持Set属性）</span><br></pre></td></tr></table></figure>
+<p> 可以看到，已经成功注入，使用起来非常简洁，不在像spring里面还得通过一大堆xml来注入各种数据结构到Bean里面，使得代码精简了不少。</p>
+<p>原文：<a href="https://blog.csdn.net/u010454030/article/details/78378457?utm_source=copy" target="_blank" rel="noopener">https://blog.csdn.net/u010454030/article/details/78378457?utm_source=copy</a>  </p>
 
       
     </div>
@@ -451,7 +440,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/vue/" rel="tag"># vue</a>
+            <a href="/tags/spring-boot/" rel="tag"># spring-boot</a>
           
         </div>
       
@@ -464,8 +453,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/16/log4j/log4j.xml/" rel="next" title="log4j.xml配置">
-                <i class="fa fa-chevron-left"></i> log4j.xml配置
+              <a href="/2018/10/10/java/Java 8 引入了新的语言特性——默认方法（Default Methods）/" rel="next" title="Java 8 引入了新的语言特性——默认方法（Default Methods）">
+                <i class="fa fa-chevron-left"></i> Java 8 引入了新的语言特性——默认方法（Default Methods）
               </a>
             
           </div>
@@ -473,10 +462,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/25/spark开发环境的搭建/spark环境搭建/" rel="prev" title="spark环境搭建（Windows版）">
-                spark环境搭建（Windows版） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
