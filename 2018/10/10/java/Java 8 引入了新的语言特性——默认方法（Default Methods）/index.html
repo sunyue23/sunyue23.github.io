@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Default methods enable new functionality to be added to the interfaces of libraries and ensure binary compatibility with code written for older versions of those interfaces.   默认方法允许您添加新的功能到现有库的接口中，并">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 8 引入了新的语言特性——默认方法（Default Methods）">
+<meta property="og:url" content="http://yoursite.com/2018/10/10/java/Java 8 引入了新的语言特性——默认方法（Default Methods）/index.html">
+<meta property="og:site_name" content="sunyue&#39;s Personal website">
+<meta property="og:description" content="Default methods enable new functionality to be added to the interfaces of libraries and ensure binary compatibility with code written for older versions of those interfaces.   默认方法允许您添加新的功能到现有库的接口中，并">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-10-10T02:32:39.050Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java 8 引入了新的语言特性——默认方法（Default Methods）">
+<meta name="twitter:description" content="Default methods enable new functionality to be added to the interfaces of libraries and ensure binary compatibility with code written for older versions of those interfaces.   默认方法允许您添加新的功能到现有库的接口中，并">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/10/java/Java 8 引入了新的语言特性——默认方法（Default Methods）/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Java 8 引入了新的语言特性——默认方法（Default Methods） | sunyue's Personal website</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sunyue's Personal website</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">我还是喜欢你 像风走了八万里 不问归期</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/10/java/Java 8 引入了新的语言特性——默认方法（Default Methods）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sunyue">
+      <meta itemprop="description" content="我还是喜欢你 像风走了八万里 不问归期">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sunyue's Personal website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java 8 引入了新的语言特性——默认方法（Default Methods）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-10 10:32:23 / 修改时间：10:32:39" itemprop="dateCreated datePublished" datetime="2018-10-10T10:32:23+08:00">2018-10-10</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/10/java/Java 8 引入了新的语言特性——默认方法（Default Methods）/" class="leancloud_visitors" data-flag-title="Java 8 引入了新的语言特性——默认方法（Default Methods）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p><a href="http://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html" target="_blank" rel="noopener">Default methods</a> enable new functionality to be added to the interfaces of libraries and ensure binary compatibility with code written for older versions of those interfaces.</p>
+</blockquote>
+<blockquote>
+<p>默认方法允许您添加新的功能到现有库的接口中，并能确保与采用旧版本接口编写的代码的二进制兼容性。</p>
+</blockquote>
+<p>默认方法是在接口中的方法签名前加上了 <code>default</code> 关键字的实现方法。</p>
+<a id="more"></a>
+<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">interface InterfaceA &#123;</span><br><span class="line">    default void foo() &#123;</span><br><span class="line">        System.out.println(&quot;InterfaceA foo&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ClassA implements InterfaceA &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Test &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new ClassA().foo(); // 打印：“InterfaceA foo”</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>ClassA</code> 类并没有实现 <code>InterfaceA</code> 接口中的 <code>foo</code> 方法，<code>InterfaceA</code> 接口中提供了 <code>foo</code> 方法的默认实现，因此可以直接调用 <code>ClassA</code> 类的 <code>foo</code> 方法。</p>
+<h2 id="为什么要有默认方法"><a href="#为什么要有默认方法" class="headerlink" title="为什么要有默认方法"></a>为什么要有默认方法</h2><p>在 java 8 之前，接口与其实现类之间的 <strong>耦合度</strong> 太高了（<strong>tightly coupled</strong>），当需要为一个接口添加方法时，所有的实现类都必须随之修改。默认方法解决了这个问题，它可以为接口添加新的方法，而不会破坏已有的接口的实现。这在 lambda 表达式作为 java 8 语言的重要特性而出现之际，为升级旧接口且保持向后兼容（backward compatibility）提供了途径。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">String[] array = new String[] &#123;</span><br><span class="line">        &quot;hello&quot;,</span><br><span class="line">        &quot;, &quot;,</span><br><span class="line">        &quot;world&quot;,</span><br><span class="line">&#125;;</span><br><span class="line">List&lt;String&gt; list = Arrays.asList(array);</span><br><span class="line">list.forEach(System.out::println); // 这是 jdk 1.8 新增的接口默认方法</span><br></pre></td></tr></table></figure>
+<p>这个 <code>forEach</code> 方法是 jdk 1.8 新增的接口默认方法，正是因为有了默认方法的引入，才不会因为 <code>Iterable</code> 接口中添加了 <code>forEach</code> 方法就需要修改所有 <code>Iterable</code> 接口的实现类。</p>
+<p>下面的代码展示了 jdk 1.8 的 <code>Iterable</code> 接口中的 <code>forEach</code> 默认方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">package java.lang;</span><br><span class="line"></span><br><span class="line">import java.util.Objects;</span><br><span class="line">import java.util.function.Consumer;</span><br><span class="line"></span><br><span class="line">public interface Iterable&lt;T&gt; &#123;</span><br><span class="line">    default void forEach(Consumer&lt;? super T&gt; action) &#123;</span><br><span class="line">        Objects.requireNonNull(action);</span><br><span class="line">        for (T t : this) &#123;</span><br><span class="line">            action.accept(t);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="默认方法的继承"><a href="#默认方法的继承" class="headerlink" title="默认方法的继承"></a>默认方法的继承</h2><p>和其它方法一样，接口默认方法也可以被继承。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">interface InterfaceA &#123;</span><br><span class="line">    default void foo() &#123;</span><br><span class="line">        System.out.println(&quot;InterfaceA foo&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface InterfaceB extends InterfaceA &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface InterfaceC extends InterfaceA &#123;</span><br><span class="line">    @Override</span><br><span class="line">    default void foo() &#123;</span><br><span class="line">        System.out.println(&quot;InterfaceC foo&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface InterfaceD extends InterfaceA &#123;</span><br><span class="line">    @Override</span><br><span class="line">    void foo();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Test &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new InterfaceB() &#123;&#125;.foo(); // 打印：“InterfaceA foo”</span><br><span class="line">        new InterfaceC() &#123;&#125;.foo(); // 打印：“InterfaceC foo”</span><br><span class="line">        new InterfaceD() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void foo() &#123;</span><br><span class="line">                System.out.println(&quot;InterfaceD foo&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.foo(); // 打印：“InterfaceD foo”</span><br><span class="line">        </span><br><span class="line">        // 或者使用 lambda 表达式</span><br><span class="line">        ((InterfaceD) () -&gt; System.out.println(&quot;InterfaceD foo&quot;)).foo();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接口默认方法的继承分三种情况（分别对应上面的 <code>InterfaceB</code> 接口、<code>InterfaceC</code> 接口和 <code>InterfaceD</code> 接口）：</p>
+<ul>
+<li>不覆写默认方法，直接从父接口中获取方法的默认实现。</li>
+<li>覆写默认方法，这跟类与类之间的覆写规则相类似。</li>
+<li>覆写默认方法并将它重新声明为抽象方法，这样新接口的子类必须再次覆写并实现这个抽象方法。</li>
+</ul>
+<h2 id="默认方法的多继承"><a href="#默认方法的多继承" class="headerlink" title="默认方法的多继承"></a>默认方法的多继承</h2><p>Java 使用的是单继承、多实现的机制，为的是避免多继承带来的调用歧义的问题。当接口的子类同时拥有具有相同签名的方法时，就需要考虑一种解决冲突的方案。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">interface InterfaceA &#123;</span><br><span class="line">    default void foo() &#123;</span><br><span class="line">        System.out.println(&quot;InterfaceA foo&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface InterfaceB &#123;</span><br><span class="line">    default void bar() &#123;</span><br><span class="line">        System.out.println(&quot;InterfaceB bar&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface InterfaceC &#123;</span><br><span class="line">    default void foo() &#123;</span><br><span class="line">        System.out.println(&quot;InterfaceC foo&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    default void bar() &#123;</span><br><span class="line">        System.out.println(&quot;InterfaceC bar&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ClassA implements InterfaceA, InterfaceB &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 错误</span><br><span class="line">//class ClassB implements InterfaceB, InterfaceC &#123;</span><br><span class="line">//&#125;</span><br><span class="line"></span><br><span class="line">class ClassB implements InterfaceB, InterfaceC &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void bar() &#123;</span><br><span class="line">        InterfaceB.super.bar(); // 调用 InterfaceB 的 bar 方法</span><br><span class="line">        InterfaceC.super.bar(); // 调用 InterfaceC 的 bar 方法</span><br><span class="line">        System.out.println(&quot;ClassB bar&quot;); // 做其他的事</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在 <code>ClassA</code> 类中，它实现的 <code>InterfaceA</code> 接口和 <code>InterfaceB</code> 接口中的方法不存在歧义，可以直接多实现。</p>
+<p>在 <code>ClassB</code> 类中，它实现的 <code>InterfaceB</code> 接口和 <code>InterfaceC</code> 接口中都存在相同签名的 <code>foo</code> 方法，需要手动解决冲突。覆写存在歧义的方法，并可以使用 <code>InterfaceName.super.methodName();</code> 的方式手动调用需要的接口默认方法。</p>
+<h2 id="接口继承行为发生冲突时的解决规则"><a href="#接口继承行为发生冲突时的解决规则" class="headerlink" title="接口继承行为发生冲突时的解决规则"></a>接口继承行为发生冲突时的解决规则</h2><p>值得注意的是这么一种情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">interface InterfaceA &#123;</span><br><span class="line">    default void foo() &#123;</span><br><span class="line">        System.out.println(&quot;InterfaceA foo&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface InterfaceB extends InterfaceA &#123;</span><br><span class="line">    @Override</span><br><span class="line">    default void foo() &#123;</span><br><span class="line">        System.out.println(&quot;InterfaceB foo&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 正确</span><br><span class="line">class ClassA implements InterfaceA, InterfaceB &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ClassB implements InterfaceA, InterfaceB &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void foo() &#123;</span><br><span class="line">//        InterfaceA.super.foo(); // 错误</span><br><span class="line">        InterfaceB.super.foo();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当 <code>ClassA</code> 类多实现 <code>InterfaceA</code> 接口和 <code>InterfaceB</code> 接口时，不会出现方法名歧义的错误。当 <code>ClassB</code> 类覆写 <code>foo</code> 方法时，无法通过 <code>InterfaceA.super.foo();</code> 调用 <code>InterfaceA</code> 接口的 <code>foo</code> 方法。</p>
+<p>因为 <code>InterfaceB</code> 接口继承了 <code>InterfaceA</code> 接口，那么 <code>InterfaceB</code> 接口一定包含了所有 <code>InterfaceA</code> 接口中的字段方法，因此一个同时实现了 <code>InterfaceA</code> 接口和 <code>InterfaceB</code> 接口的类与一个只实现了 <code>InterfaceB</code> 接口的类完全等价。</p>
+<p>这很好理解，就相当于 <code>class SimpleDateFormat extends DateFormat</code> 与 <code>class SimpleDateFormat extends DateFormat, Object</code> 等价（如果允许多继承）。</p>
+<p>或者换种方式理解：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class ClassC &#123;</span><br><span class="line">    public void foo() &#123;</span><br><span class="line">        System.out.println(&quot;ClassC foo&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ClassD extends ClassC &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void foo() &#123;</span><br><span class="line">        System.out.println(&quot;ClassD foo&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Test &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ClassC classC = new ClassD();</span><br><span class="line">        classC.foo(); // 打印：“ClassD foo”</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里的 <code>classC.foo();</code> 同样调用的是 <code>ClassD</code> 类中的 <code>foo</code> 方法，打印结果为“<code>ClassD foo</code>”，因为 <code>ClassC</code> 类中的 <code>foo</code> 方法在 <code>ClassD</code> 类中被覆写了。</p>
+<p>在上面的 <code>ClassA</code> 类中不会出现方法名歧义的原因是所谓“存在歧义”的方法其实都来自于 <code>InterfaceA</code> 接口，<code>InterfaceB</code> 接口中的“同名方法”只是继承自 <code>InterfaceA</code> 接口而来并对其进行了覆写。<code>ClassA</code> 类实现的两个接口不是两个毫不相干的接口，因此不存在同名歧义方法。</p>
+<p>而覆写意味着对父类方法的屏蔽，这也是 <code>Override</code> 的设计意图之一。因此在实现了 <code>InterfaceB</code> 接口的类中无法访问已被覆写的 <code>InterfaceA</code> 接口中的 <code>foo</code> 方法。</p>
+<p>这是当接口继承行为发生冲突时的规则之一，即 <strong>被其它类型所覆盖的方法会被忽略</strong>。</p>
+<p>如果想要调用 <code>InterfaceA</code> 接口中的 <code>foo</code> 方法，只能通过自定义一个新的接口同样继承 <code>InterfaceA</code> 接口并显示地覆写 <code>foo</code> 方法，在方法中使用 <code>InterfaceA.super.foo();</code> 调用 <code>InterfaceA</code> 接口的 <code>foo</code> 方法，最后让实现类同时实现 <code>InterfaceB</code> 接口和自定义的新接口，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">interface InterfaceA &#123;</span><br><span class="line">    default void foo() &#123;</span><br><span class="line">        System.out.println(&quot;InterfaceA foo&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface InterfaceB extends InterfaceA &#123;</span><br><span class="line">    @Override</span><br><span class="line">    default void foo() &#123;</span><br><span class="line">        System.out.println(&quot;InterfaceB foo&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface InterfaceC extends InterfaceA &#123;</span><br><span class="line">    @Override</span><br><span class="line">    default void foo() &#123;</span><br><span class="line">        InterfaceA.super.foo();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ClassA implements InterfaceB, InterfaceC &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void foo() &#123;</span><br><span class="line">        InterfaceB.super.foo();</span><br><span class="line">        InterfaceC.super.foo();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意！</strong> 虽然 <code>InterfaceC</code> 接口的 <code>foo</code> 方法只是调用了一下父接口的默认实现方法，但是这个覆写 <strong>不能省略</strong>，否则 <code>InterfaceC</code>接口中继承自 <code>InterfaceA</code> 接口的隐式的 <code>foo</code> 方法同样会被认为是被 <code>InterfaceB</code> 接口覆写了而被屏蔽，会导致调用 <code>InterfaceC.super.foo()</code> 时出错。</p>
+<p>通过这个例子，应该注意到在使用一个默认方法前，一定要考虑它是否真的需要。因为 <strong>默认方法会带给程序歧义，并且在复杂的继承体系中容易产生编译错误</strong>。滥用默认方法可能给代码带来意想不到、莫名其妙的错误。</p>
+<h2 id="接口与抽象类"><a href="#接口与抽象类" class="headerlink" title="接口与抽象类"></a>接口与抽象类</h2><p>当接口继承行为发生冲突时的另一个规则是，<strong>类的方法声明优先于接口默认方法，无论该方法是具体的还是抽象的</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">interface InterfaceA &#123;</span><br><span class="line">    default void foo() &#123;</span><br><span class="line">        System.out.println(&quot;InterfaceA foo&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    default void bar() &#123;</span><br><span class="line">        System.out.println(&quot;InterfaceA bar&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">abstract class AbstractClassA &#123;</span><br><span class="line">    public abstract void foo();</span><br><span class="line"></span><br><span class="line">    public void bar() &#123;</span><br><span class="line">        System.out.println(&quot;AbstractClassA bar&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ClassA extends AbstractClassA implements InterfaceA &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void foo() &#123;</span><br><span class="line">        InterfaceA.super.foo();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Test &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ClassA classA = new ClassA();</span><br><span class="line">        classA.foo(); // 打印：“InterfaceA foo”</span><br><span class="line">        classA.bar(); // 打印：“AbstractClassA bar”</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>ClassA</code> 类中并不需要手动覆写 <code>bar</code> 方法，因为优先考虑到 <code>ClassA</code> 类继承了的 <code>AbstractClassA</code> 抽象类中存在对 <code>bar</code> 方法的实现，同样的因为 <code>AbstractClassA</code> 抽象类中的 <code>foo</code> 方法是抽象的，所以在 <code>ClassA</code> 类中必须实现 <code>foo</code> 方法。</p>
+<p>虽然 Java 8 的接口的默认方法就像抽象类，能提供方法的实现，但是他们俩仍然是 <strong>不可相互代替的</strong>：</p>
+<ul>
+<li>接口可以被类多实现（被其他接口多继承），抽象类只能被单继承。</li>
+<li>接口中没有 <code>this</code> 指针，没有构造函数，不能拥有实例字段（实例变量）或实例方法，无法保存 <strong>状态</strong>（<strong>state</strong>），抽象方法中可以。</li>
+<li>抽象类不能在 java 8 的 lambda 表达式中使用。</li>
+<li>从设计理念上，接口反映的是 <strong>“like-a”</strong> 关系，抽象类反映的是 <strong>“is-a”</strong> 关系。</li>
+</ul>
+<h2 id="接口静态方法"><a href="#接口静态方法" class="headerlink" title="接口静态方法"></a>接口静态方法</h2><p>除了默认方法，Java 8 还在允许在接口中定义静态方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">interface InterfaceA &#123;</span><br><span class="line">    default void foo() &#123;</span><br><span class="line">        printHelloWorld();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    static void printHelloWorld() &#123;</span><br><span class="line">        System.out.println(&quot;hello, world&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Test &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        InterfaceA.printHelloWorld(); // 打印：“hello, world”</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="其他注意点"><a href="#其他注意点" class="headerlink" title="其他注意点"></a>其他注意点</h2><ul>
+<li><code>default</code> 关键字只能在接口中使用（以及用在 <code>switch</code> 语句的 <code>default</code> 分支），不能用在抽象类中。</li>
+<li>接口默认方法不能覆写 <code>Object</code> 类的 <code>equals</code>、<code>hashCode</code> 和 <code>toString</code> 方法。</li>
+<li>接口中的静态方法必须是 <code>public</code> 的，<code>public</code> 修饰符可以省略，<code>static</code> 修饰符不能省略。</li>
+<li>即使使用了 java 8 的环境，一些 IDE 仍然可能在一些代码的实时编译提示时出现异常的提示（例如无法发现 java 8 的语法错误），因此不要过度依赖 IDE。</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/09/java/静态代码块、构造代码块、构造函数以及Java类初始化顺序/" rel="next" title="静态代码块、构造代码块、构造函数以及Java类初始化顺序">
+                <i class="fa fa-chevron-left"></i> 静态代码块、构造代码块、构造函数以及Java类初始化顺序
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">sunyue</p>
+              <p class="site-description motion-element" itemprop="description">我还是喜欢你 像风走了八万里 不问归期</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一个简单的例子"><span class="nav-number">1.</span> <span class="nav-text">一个简单的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要有默认方法"><span class="nav-number">2.</span> <span class="nav-text">为什么要有默认方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认方法的继承"><span class="nav-number">3.</span> <span class="nav-text">默认方法的继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认方法的多继承"><span class="nav-number">4.</span> <span class="nav-text">默认方法的多继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口继承行为发生冲突时的解决规则"><span class="nav-number">5.</span> <span class="nav-text">接口继承行为发生冲突时的解决规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口与抽象类"><span class="nav-number">6.</span> <span class="nav-text">接口与抽象类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口静态方法"><span class="nav-number">7.</span> <span class="nav-text">接口静态方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他注意点"><span class="nav-number">8.</span> <span class="nav-text">其他注意点</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sunyue</span>
+
+  
+
+  
+</div>
+
+
+
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.4.1</div>
+-->
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "s7YR589kejRXGFsujl9O4bDj-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "s7YR589kejRXGFsujl9O4bDj-gzGzoHsz",
+                'X-LC-Key': "rhOMVK5s5S6hzwNIcD1qPh2V",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+ 
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
