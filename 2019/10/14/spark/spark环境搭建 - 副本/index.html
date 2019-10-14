@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="越来越多的平台（微信公众平台，新浪微博，简书，百度打赏等）支持打赏功能，付费阅读时代越来越近，特此增加了打赏功能，支持微信打赏和支付宝打赏。 只需要  主题配置文件 中填入 微信 和 支付宝 收款二维码图片地址 即可开启该功能。  打赏功能配置示例     reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！  wechatpay: /path/to/wechat-rewa">
-<meta name="keywords" content="hexo网站搭建">
+  <meta name="description" content="Spark的持久化级别   持久化级别 含义解释     MEMORY_ONLY 使用未序列化的Java对象格式，将数据保存在内存中。如果内存不够存放所有的数据，则数据可能就不会进行持久化。那么下次对这个RDD执行算子操作时，那些没有被持久化的数据，需要从源头处重新计算一遍。这是默认的持久化策略，使用cache()方法时，实际就是使用的这种持久化策略。   MEMORY_AND_DISK 使用未序">
+<meta name="keywords" content="spark">
 <meta property="og:type" content="article">
-<meta property="og:title" content="开启打赏功能">
-<meta property="og:url" content="http://yoursite.com/2018/07/05/hexo搭建网站/开启打赏功能/index.html">
+<meta property="og:title" content="36-RDD持久化详解">
+<meta property="og:url" content="http://yoursite.com/2019/10/14/spark/spark环境搭建 - 副本/index.html">
 <meta property="og:site_name" content="sunyue&#39;s Personal website">
-<meta property="og:description" content="越来越多的平台（微信公众平台，新浪微博，简书，百度打赏等）支持打赏功能，付费阅读时代越来越近，特此增加了打赏功能，支持微信打赏和支付宝打赏。 只需要  主题配置文件 中填入 微信 和 支付宝 收款二维码图片地址 即可开启该功能。  打赏功能配置示例     reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！  wechatpay: /path/to/wechat-rewa">
+<meta property="og:description" content="Spark的持久化级别   持久化级别 含义解释     MEMORY_ONLY 使用未序列化的Java对象格式，将数据保存在内存中。如果内存不够存放所有的数据，则数据可能就不会进行持久化。那么下次对这个RDD执行算子操作时，那些没有被持久化的数据，需要从源头处重新计算一遍。这是默认的持久化策略，使用cache()方法时，实际就是使用的这种持久化策略。   MEMORY_AND_DISK 使用未序">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-20T08:52:22.517Z">
+<meta property="og:updated_time" content="2019-10-14T05:14:39.352Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="开启打赏功能">
-<meta name="twitter:description" content="越来越多的平台（微信公众平台，新浪微博，简书，百度打赏等）支持打赏功能，付费阅读时代越来越近，特此增加了打赏功能，支持微信打赏和支付宝打赏。 只需要  主题配置文件 中填入 微信 和 支付宝 收款二维码图片地址 即可开启该功能。  打赏功能配置示例     reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！  wechatpay: /path/to/wechat-rewa">
+<meta name="twitter:title" content="36-RDD持久化详解">
+<meta name="twitter:description" content="Spark的持久化级别   持久化级别 含义解释     MEMORY_ONLY 使用未序列化的Java对象格式，将数据保存在内存中。如果内存不够存放所有的数据，则数据可能就不会进行持久化。那么下次对这个RDD执行算子操作时，那些没有被持久化的数据，需要从源头处重新计算一遍。这是默认的持久化策略，使用cache()方法时，实际就是使用的这种持久化策略。   MEMORY_AND_DISK 使用未序">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/05/hexo搭建网站/开启打赏功能/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/10/14/spark/spark环境搭建 - 副本/"/>
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>开启打赏功能 | sunyue's Personal website</title>
+  <title>36-RDD持久化详解 | sunyue's Personal website</title>
   
 
 
@@ -301,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/hexo搭建网站/开启打赏功能/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/14/spark/spark环境搭建 - 副本/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sunyue">
@@ -318,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">开启打赏功能
+          <h1 class="post-title" itemprop="name headline">36-RDD持久化详解
               
             
           </h1>
@@ -343,24 +343,12 @@
                 
               
 
-              <time title="创建时间：2018-07-05 19:52:00" itemprop="dateCreated datePublished" datetime="2018-07-05T19:52:00+08:00">2018-07-05</time>
+              <time title="创建时间：2019-10-14 13:13:00 / 修改时间：13:14:39" itemprop="dateCreated datePublished" datetime="2019-10-14T13:13:00+08:00">2019-10-14</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-20 16:52:22" itemprop="dateModified" datetime="2018-07-20T16:52:22+08:00">2018-07-20</time>
               
             
           </span>
@@ -377,7 +365,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo网站搭建/" itemprop="url" rel="index"><span itemprop="name">hexo网站搭建</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a></span>
 
                 
                 
@@ -391,7 +379,7 @@
 
           
           
-             <span id="/2018/07/05/hexo搭建网站/开启打赏功能/" class="leancloud_visitors" data-flag-title="开启打赏功能">
+             <span id="/2019/10/14/spark/spark环境搭建 - 副本/" class="leancloud_visitors" data-flag-title="36-RDD持久化详解">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -422,14 +410,46 @@
       
 
       
-        <p>越来越多的平台（微信公众平台，新浪微博，简书，百度打赏等）支持打赏功能，付费阅读时代越来越近，特此增加了打赏功能，支持微信打赏和支付宝打赏。 只需要 <font color="purple"> <strong>主题配置文件</strong> </font>中填入 微信 和 支付宝 收款二维码图片地址 即可开启该功能。 </p>
-<font color="gray">打赏功能配置示例 </font>
-
-
-
-<p>reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！ </p>
-<p>wechatpay: /path/to/wechat-reward-image </p>
-<p>alipay: /path/to/alipay-reward-image </p>
+        <h3 id="Spark的持久化级别"><a href="#Spark的持久化级别" class="headerlink" title="Spark的持久化级别"></a>Spark的持久化级别</h3><table>
+<thead>
+<tr>
+<th>持久化级别</th>
+<th>含义解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MEMORY_ONLY</td>
+<td>使用未序列化的Java对象格式，将数据保存在内存中。如果内存不够存放所有的数据，则数据可能就不会进行持久化。那么下次对这个RDD执行算子操作时，那些没有被持久化的数据，需要从源头处重新计算一遍。这是默认的持久化策略，使用cache()方法时，实际就是使用的这种持久化策略。</td>
+</tr>
+<tr>
+<td>MEMORY_AND_DISK</td>
+<td>使用未序列化的Java对象格式，优先尝试将数据保存在内存中。如果内存不够存放所有的数据，会将数据写入磁盘文件中，下次对这个RDD执行算子时，持久化在磁盘文件中的数据会被读取出来使用。</td>
+</tr>
+<tr>
+<td>MEMORY_ONLY_SER</td>
+<td>基本含义同MEMORY_ONLY。唯一的区别是，会将RDD中的数据进行序列化，RDD的每个partition会被序列化成一个字节数组。这种方式更加节省内存，从而可以避免持久化的数据占用过多内存导致频繁GC。</td>
+</tr>
+<tr>
+<td>MEMORY_AND_DISK_SER</td>
+<td>基本含义同MEMORY_AND_DISK。唯一的区别是，会将RDD中的数据进行序列化，RDD的每个partition会被序列化成一个字节数组。这种方式更加节省内存，从而可以避免持久化的数据占用过多内存导致频繁GC。</td>
+</tr>
+<tr>
+<td>DISK_ONLY</td>
+<td>使用未序列化的Java对象格式，将数据全部写入磁盘文件中。</td>
+</tr>
+<tr>
+<td>MEMORY_ONLY_2, MEMORY_AND_DISK_2, 等等.</td>
+<td>对于上述任意一种持久化策略，如果加上后缀_2，代表的是将每个持久化的数据，都复制一份副本，并将副本保存到其他节点上。这种基于副本的持久化机制主要用于进行容错。假如某个节点挂掉，节点的内存或磁盘中的持久化数据丢失了，那么后续对RDD计算时还可以使用该数据在其他节点上的副本。如果没有副本的话，就只能将这些数据从源头处重新计算一遍了。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="如何选择一种最合适的持久化策略"><a href="#如何选择一种最合适的持久化策略" class="headerlink" title="如何选择一种最合适的持久化策略"></a>如何选择一种最合适的持久化策略</h3><ul>
+<li>默认情况下，性能最高的当然是MEMORY_ONLY，但前提是你的内存必须足够足够大，可以绰绰有余地存放下整个RDD的所有数据。因为不进行序列化与反序列化操作，就避免了这部分的性能开销；对这个RDD的后续算子操作，都是基于纯内存中的数据的操作，不需要从磁盘文件中读取数据，性能也很高；而且不需要复制一份数据副本，并远程传送到其他节点上。但是这里必须要注意的是，在实际的生产环境中，恐怕能够直接用这种策略的场景还是有限的，如果RDD中数据比较多时（比如几十亿），直接用这种持久化级别，会导致JVM的OOM内存溢出异常。</li>
+<li>如果使用MEMORY_ONLY级别时发生了内存溢出，那么建议尝试使用MEMORY_ONLY_SER级别。该级别会将RDD数据序列化后再保存在内存中，此时每个partition仅仅是一个字节数组而已，大大减少了对象数量，并降低了内存占用。这种级别比MEMORY_ONLY多出来的性能开销，主要就是序列化与反序列化的开销。但是后续算子可以基于纯内存进行操作，因此性能总体还是比较高的。此外，可能发生的问题同上，如果RDD中的数据量过多的话，还是可能会导致OOM内存溢出的异常。</li>
+<li>如果纯内存的级别都无法使用，那么建议使用MEMORY_AND_DISK_SER策略，而不是MEMORY_AND_DISK策略。因为既然到了这一步，就说明RDD的数据量很大，内存无法完全放下。序列化后的数据比较少，可以节省内存和磁盘的空间开销。同时该策略会优先尽量尝试将数据缓存在内存中，内存缓存不下才会写入磁盘。</li>
+<li>通常不建议使用DISK_ONLY和后缀为_2的级别：因为完全基于磁盘文件进行数据的读写，会导致性能急剧降低，有时还不如重新计算一次所有RDD。后缀为_2的级别，必须将所有数据都复制一份副本，并发送到其他节点上，数据复制以及网络传输会导致较大的性能开销，除非是要求作业的高可用性，否则不建议使用。</li>
+</ul>
 
       
     </div>
@@ -450,7 +470,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hexo网站搭建/" rel="tag"># hexo网站搭建</a>
+            <a href="/tags/spark/" rel="tag"># spark</a>
           
         </div>
       
@@ -463,8 +483,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/05/hive/hive积累/" rel="next" title="hive语法">
-                <i class="fa fa-chevron-left"></i> hive语法
+              <a href="/2018/10/11/java/Java 中 Comparable 和 Comparator 比较/" rel="next" title="Java 中 Comparable 和 Comparator 比较">
+                <i class="fa fa-chevron-left"></i> Java 中 Comparable 和 Comparator 比较
               </a>
             
           </div>
@@ -473,8 +493,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/17/git/git/" rel="prev" title="git命令">
-                git命令 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/10/14/spark/36-RDD持久化详解/" rel="prev" title="36-RDD持久化详解">
+                36-RDD持久化详解 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -520,8 +540,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -646,6 +675,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spark的持久化级别"><span class="nav-number">1.</span> <span class="nav-text">Spark的持久化级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何选择一种最合适的持久化策略"><span class="nav-number">2.</span> <span class="nav-text">如何选择一种最合适的持久化策略</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
